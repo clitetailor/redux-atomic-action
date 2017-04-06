@@ -1,0 +1,29 @@
+{
+  "name": "redux-atomic-action",
+  "version": "0.0.1",
+  "description": "Redux Atomic Reducer",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha --reporter=nyan"
+  },
+  "keywords": [
+    "redux",
+    "atom",
+    "atomic",
+    "reducer"
+  ],
+  "author": "clitetailor",
+  "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "redux": "^3.6.0"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "redux": "^3.6.0"
+  }
+}
