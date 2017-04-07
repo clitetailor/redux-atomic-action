@@ -5,7 +5,7 @@ let { createAtomicReducer, atomicThunk, createStateModifier } = require('../lib/
 
 
 describe('#createAtomicReducer()', function () {
-	it('should return something!', function (done) {
+	it("should return 'something'", function (done) {
 		
 		const initialState = {
 			todos: [],
@@ -118,9 +118,40 @@ describe('#createStateModifier()', function () {
 			store.dispatch(addTodo('something'));
 		})
 	})
+
+	describe('deeply modify state test', function () {
+
+		it('should equal ADD_TODO', function (done) {
+			const initialState = {
+				dashboard: {
+					todos: []
+				},
+				visibleFilter: "SHOW_ALL"
+			}
+
+			let store = createStore(createAtomicReducer(initialState),
+				applyMiddleware(atomicThunk));
+			
+			store.subscribe(() => {
+				store.getState().dashboard.todos.should.eql(['something']);
+				done();
+			})
+
+			let todos = createStateModifier(['dashboard', 'todos']);
+
+			function addTodo(todo) {
+				let ADD_TODO = todos => todos.concat(todo);
+
+				return todos(ADD_TODO);
+			}
+
+			store.dispatch(addTodo('something'));
+		})
+	})
 })
 
 describe('Async atomic action', function () {
+	
 	it("should return new todos", function (done) {
 		const initialState = {
 			todos: [],
@@ -144,6 +175,7 @@ describe('Async atomic action', function () {
 
 					return setTodos(GET_TODOS);
 				})
+				.catch(err => done(err))
 		}
 
 		getTodos().then(store.dispatch);

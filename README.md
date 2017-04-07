@@ -1,15 +1,28 @@
 Redux Atomic Action
 ===================
 
-Installation
+> Inspired by Haskell and Angular 2
+
+Core Concept
 ============
+
+```javascript
+function createAction() {
+	// ...
+
+	return atomicModifyStateAction;
+}
+```
+
+Installation
+------------
 
 ```bash
 npm install --save redux-atomic-action
 ```
 
 Usage
-=====
+-----
 
 ```javascript
 import { createStore, applyMiddleware } from 'redux';
@@ -20,12 +33,12 @@ const initialState = {
 	visibleFilter: "SHOW_ALL"
 }
 
-let store = createStore(createAtomicReducer(initialState), applyMiddleware(atomicThunk));
-
+let store = createStore(createAtomicReducer(initialState),
+	applyMiddleware(atomicThunk));
 
 store.subscribe(() => {
 	console.log(store.getState().todos);
-	// ['something']
+	// => ['something']
 })
 
 function addTodo(todo) {
@@ -43,7 +56,7 @@ store.dispatch(addTodo('something'));
 ```
 
 Debug
-=====
+-----
 
 ```javascript
 function addTodo(todo) {
@@ -56,12 +69,12 @@ function addTodo(todo) {
 ```
 
 Modify State Tree
-=================
+-----------------
 
 ```javascript
 import { createAtomicReducer, atomicThunk, createStateModifier } from 'redux-atomic-action';
 
-...
+// ...
 
 let todos = createStateModifier('todos');
 
@@ -72,8 +85,18 @@ function addTodo(todo) {
 }
 ```
 
+```javascript
+let initialState = {
+	dashboard: {
+		todos: [...]
+	}
+}
+
+let todos = createStateModifier(['dashboard', 'todos'])
+```
+
 Async Atomic Action
-===================
+-------------------
 
 ```javascript
 function getTodos() {
