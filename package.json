@@ -1,29 +1,27 @@
 {
   "name": "redux-atomic-action",
   "version": "0.0.1",
-  "description": "Redux Atomic Reducer",
+  "description": "Simple redux reducer for atomic-modify-state actions",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha --reporter=nyan"
   },
   "keywords": [
+    "middleware",
     "redux",
     "atom",
     "atomic",
-    "reducer"
+    "reducer",
+    "functional"
   ],
   "author": "clitetailor",
-  "license": "ISC",
+  "license": "MIT",
   "directories": {
     "test": "test"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
-    "redux": "^3.6.0"
-  },
-  "dependencies": {
-    "chai": "^3.5.0",
     "redux": "^3.6.0"
   }
 }
