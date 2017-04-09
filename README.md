@@ -4,18 +4,17 @@ Redux Atomic Action
 > Inspired by Haskell and Angular 2
 
 Core Concept
-============
+------------
 
 ```javascript
 function createAction() {
 	// ...
-
 	return atomicModifyStateAction;
 }
 ```
 
-Installation
-------------
+Install
+-------
 
 ```bash
 npm install --save redux-atomic-action
@@ -64,7 +63,7 @@ function addTodo(todo) {
 			todos: pre.todos.concat(todo)
 		})
 	
-	return ADD_TODO
+	return ADD_TODO;
 }
 ```
 
@@ -106,3 +105,8 @@ function getTodos() {
 
 getTodos.then(store.dispatch);
 ```
+
+Changelog
+---------
+
+Visit [Github Releases](https://github.com/clitetailor/redux-atomic-action/releases) page for more information.
