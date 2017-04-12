@@ -1,3 +1,4 @@
+'use strict'
 let should = require('chai').should(),
 	{ createStore, applyMiddleware } = require('redux');
 

@@ -41,10 +41,10 @@ store.subscribe(() => {
 })
 
 function addTodo(todo) {
-	return (preState) => {
+	return (prevState) => {
 		
-		let nextState = Object.assign({}, preState, {
-			todos: preState.todos.concat(todo)
+		let nextState = Object.assign({}, prevState, {
+			todos: prevState.todos.concat(todo)
 		})
 
 		return nextState;
@@ -52,19 +52,6 @@ function addTodo(todo) {
 }
 
 store.dispatch(addTodo('something'));
-```
-
-Debug
------
-
-```javascript
-function addTodo(todo) {
-	let ADD_TODO = pre => Object.assign({}, pre, {
-			todos: pre.todos.concat(todo)
-		})
-	
-	return ADD_TODO;
-}
 ```
 
 Modify State Tree
@@ -78,10 +65,12 @@ import { createAtomicReducer, atomicThunk, createStateModifier } from 'redux-ato
 let todos = createStateModifier('todos');
 
 function addTodo(todo) {
-	let ADD_TODO = todos => todos.concat(todo);
+	let ADD_TODO = _todos => _todos.concat([todo]);
 
 	return todos(ADD_TODO);
 }
+
+store.dispatch(addTodo('something'))
 ```
 
 ```javascript
@@ -92,6 +81,57 @@ let initialState = {
 }
 
 let todos = createStateModifier(['dashboard', 'todos'])
+```
+
+Action Name
+-----------
+
+```javascript
+function addTodo(todo) {
+	let ADD_TODO = prev => Object.assign({}, prev, {
+			todos: prev.todos.concat(todo)
+		})
+	
+	return ADD_TODO;
+}
+// action.name === "ADD_TODO"
+```
+
+```javascript
+let todos = createStateModifier('todos');
+
+function addTodo(todo) {
+	let ADD_TODO = _todos => _todos.concat([todo]);
+	
+	return todos(ADD_TODO);
+}
+// action.name === "ADD_TODO"
+```
+
+```javascript
+import { name } from 'redux-atomic-action'; // *alias*: `nameFunc`
+
+function addTodo(todo) {
+	return name(state =>
+		state.update('todos',
+			todos => todos.concat([todo])), "ADD_TODO");
+}
+// action.name === "ADD_TODO"
+```
+
+Default Reducer
+---------------
+
+```javascript
+function defaultReducer(state, action) {
+	if (["ADD_TODO", "GET_TODO"].indexOf(action.name) !== -1)
+	{
+		return visibleFilter(() => "SHOW_ALL")(state);
+	}
+}
+
+let store = createStore(createAtomicReducer(initialState, defaultReducer),
+	applyMiddleware(atomicThunk));
 ```
 
 Async Atomic Action
