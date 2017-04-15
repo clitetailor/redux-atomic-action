@@ -4,7 +4,7 @@
   "description": "Simple redux reducer for atomic-modify-state actions",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --reporter=nyan"
+    "test": "mocha -R dot"
   },
   "keywords": [
     "middleware",
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "karma": "^1.6.0",
     "mocha": "^3.2.0",
     "redux": "^3.6.0"
   },
