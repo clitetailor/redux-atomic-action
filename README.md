@@ -134,6 +134,18 @@ let store = createStore(createAtomicReducer(initialState, defaultReducer),
 	applyMiddleware(atomicThunk));
 ```
 
+Minimum Atomic Action
+---------------------
+
+> **alias**: `action`
+
+```javascript
+// Is the same as `name(state => state, "ALARM")`
+
+store.dispatch(atomicAction("ALARM"));
+// action.name === "ALARM"
+```
+
 Async Atomic Action
 -------------------
 

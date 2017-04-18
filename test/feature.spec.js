@@ -8,7 +8,9 @@ let {
 	atomicThunk,
 	createStateModifier,
 	name,
-	nameFunc
+	nameFunc,
+	action,
+	atomicAction
 } = require('../lib/index');
 
 
@@ -83,6 +85,17 @@ describe("#main features' test", function () {
 
 			nameFunc(() => "something", "ADD_TODO").name.should.equal("ADD_TODO")
 			nameFunc(() => "something", "ADD_TODO")().should.equal("something")
+		})
+	})
+
+	describe("#atomicAction()", function () {
+		
+		it("should return a function named 'NOTIFY'", function () {
+
+			const state = [1, 2, 3]
+
+			atomicAction("NOTIFY").name.should.equal("NOTIFY");
+			atomicAction("NOTIFY")(state).should.equal(state);
 		})
 	})
 
