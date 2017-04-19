@@ -3,13 +3,15 @@ Redux Atomic Action
 
 > Inspired by Haskell and Angular 2
 
+[![Build Status](https://travis-ci.org/clitetailor/redux-atomic-action.svg?branch=master)](https://travis-ci.org/clitetailor/redux-atomic-action)
+
 Core Concept
 ------------
 
 ```javascript
 function createAction() {
 	// ...
-	return atomicModifyStateAction;
+	return atomicAction;
 }
 ```
 

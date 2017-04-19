@@ -1,7 +1,7 @@
 {
   "name": "redux-atomic-action",
   "version": "0.0.2-4",
-  "description": "Simple redux reducer for atomic-modify-state actions",
+  "description": "Simple redux reducer for atomic actions",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha -R dot"
