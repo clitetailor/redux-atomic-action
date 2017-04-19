@@ -97,6 +97,15 @@ describe("#main features' test", function () {
 			atomicAction("NOTIFY").name.should.equal("NOTIFY");
 			atomicAction("NOTIFY")(state).should.equal(state);
 		})
+
+		it("should add a number into state array", function () {
+
+			const state = [1, 2, 3]
+
+			atomicAction("ADD_NUMBER", state =>
+				state.concat([4]))(state)
+				.should.deep.equal([1, 2, 3, 4]);
+		})
 	})
 
 	describe("#defaultReducer()", function () {

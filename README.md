@@ -97,6 +97,8 @@ function addTodo(todo) {
 // action.name === "ADD_TODO"
 ```
 
+### createStateModifier
+
 ```javascript
 let todos = createStateModifier('todos');
 
@@ -108,6 +110,8 @@ function addTodo(todo) {
 // action.name === "ADD_TODO"
 ```
 
+### name
+
 ```javascript
 import { name } from 'redux-atomic-action'; // *alias*: `nameFunc`
 
@@ -117,6 +121,25 @@ function addTodo(todo) {
 			todos => todos.concat([todo])), "ADD_TODO");
 }
 // action.name === "ADD_TODO"
+```
+
+### atomicAction
+
+> **alias**: `action`
+
+```javascript
+store.dispatch(atomicAction("ADD_TODO", state =>
+	state.update('todos', todos =>
+		todos.concat([newTodo]))))
+
+// action.name === "ADD_TODO"
+```
+
+```javascript
+// Is the same as `name(state => state, "ALARM")`
+
+store.dispatch(atomicAction("ALARM"));
+// action.name === "ALARM"
 ```
 
 Default Reducer
@@ -132,18 +155,6 @@ function defaultReducer(state, action) {
 
 let store = createStore(createAtomicReducer(initialState, defaultReducer),
 	applyMiddleware(atomicThunk));
-```
-
-Minimum Atomic Action
----------------------
-
-> **alias**: `action`
-
-```javascript
-// Is the same as `name(state => state, "ALARM")`
-
-store.dispatch(atomicAction("ALARM"));
-// action.name === "ALARM"
 ```
 
 Async Atomic Action
